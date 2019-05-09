@@ -287,7 +287,7 @@ PrefabInstance:
     - target: {fileID: 1506021539655266469, guid: 4c4df7b5e2669834db9b415c3854b16e,
         type: 3}
       propertyPath: movingSpeed
-      value: 4
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1506021539655266469, guid: 4c4df7b5e2669834db9b415c3854b16e,
         type: 3}
@@ -299,6 +299,16 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 278132844}
+    - target: {fileID: 1506021539655266469, guid: 4c4df7b5e2669834db9b415c3854b16e,
+        type: 3}
+      propertyPath: startDelay
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1506021539655266469, guid: 4c4df7b5e2669834db9b415c3854b16e,
+        type: 3}
+      propertyPath: lookAt
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c4df7b5e2669834db9b415c3854b16e, type: 3}
 --- !u!1001 &836287360
@@ -371,18 +381,23 @@ PrefabInstance:
     - target: {fileID: 3536672352371887266, guid: ca8fa030fe40a474c97c4c617da11991,
         type: 3}
       propertyPath: movingSpeed
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3536672352371887266, guid: ca8fa030fe40a474c97c4c617da11991,
         type: 3}
       propertyPath: turningSpeed
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 3536672352371887266, guid: ca8fa030fe40a474c97c4c617da11991,
         type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 278132844}
+    - target: {fileID: 3536672352371887266, guid: ca8fa030fe40a474c97c4c617da11991,
+        type: 3}
+      propertyPath: startDelay
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca8fa030fe40a474c97c4c617da11991, type: 3}
 --- !u!1 &963194225
@@ -543,12 +558,27 @@ PrefabInstance:
     - target: {fileID: 370497927623495836, guid: 3ac175271fbf87e4eb25fb6c5a391a56,
         type: 3}
       propertyPath: movingSpeed
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 370497927623495836, guid: 3ac175271fbf87e4eb25fb6c5a391a56,
         type: 3}
       propertyPath: turningSpeed
-      value: 50
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 370497927623495836, guid: 3ac175271fbf87e4eb25fb6c5a391a56,
+        type: 3}
+      propertyPath: startDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 370497927623495836, guid: 3ac175271fbf87e4eb25fb6c5a391a56,
+        type: 3}
+      propertyPath: stopWhenReachedTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 370497927623495836, guid: 3ac175271fbf87e4eb25fb6c5a391a56,
+        type: 3}
+      propertyPath: lookAt
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ac175271fbf87e4eb25fb6c5a391a56, type: 3}
@@ -627,12 +657,12 @@ PrefabInstance:
     - target: {fileID: 8870394660566994517, guid: 8729d698371208d42838e3ac2061c861,
         type: 3}
       propertyPath: startFollowingDistance
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8870394660566994517, guid: 8729d698371208d42838e3ac2061c861,
         type: 3}
       propertyPath: moveThreshold
-      value: 0.25
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8729d698371208d42838e3ac2061c861, type: 3}

@@ -10,7 +10,7 @@ public class LeaderObject : MonoBehaviour
     [Tooltip("when objects are inside this range, they follow me")]
     public float startFollowingDistance;
 
-    [Tooltip("Minimum travelled distance to record position, in meters")]
+    [Tooltip("Minimum travelled distance to record position, in meters -- lower values are more precise, but use A LOT more memory, and create more jaggy movements! ")]
     public float moveThreshold; // the followers will keep it's own records
 
     void Start()

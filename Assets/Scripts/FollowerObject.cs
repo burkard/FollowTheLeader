@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum WhatToLook{ target, nextPosition }
+
 public class FollowerObject : MonoBehaviour
 {
     public GameObject target;
@@ -13,6 +15,21 @@ public class FollowerObject : MonoBehaviour
     public float movingSpeed;
     [Tooltip("The higher the speed, the quicker they turn to the target")]
     public float turningSpeed;
+
+    [Tooltip("The delay, in seconds, until it starts to follow the target")]
+    public float startDelay = 0f;
+
+    [Tooltip("Should I stop when reach the target, or follow the whole path?")]
+    public bool stopWhenReachedTarget;
+
+    [Header("Buffer size")]
+    [Tooltip("The higher the number, the bigger the path will be - but more memory will be used! It will use the last X positions (the prior ones will be discarded)")]
+    public int bufferSize = 100;
+
+    [Header("What should I look at while I'm moving?")]
+    public WhatToLook lookAt;
+
+    private float startTime = 0f;
 
     private Vector3 relativePos;
     private Quaternion rotation;
@@ -46,30 +63,32 @@ public class FollowerObject : MonoBehaviour
         currentSqrDistance = Vector3.SqrMagnitude(target.transform.position - transform.position);
         if (currentSqrDistance <= startFollowingSqrDistance)
         {
+            RecordTargetPosition();
+
+            if (!isFollowing) startTime = Time.time + startDelay;
             isFollowing = true;
-            if (currentSqrDistance > stayAwaySqrDistance) MoveToTarget();
+            if (currentSqrDistance > stayAwaySqrDistance || !stopWhenReachedTarget) MoveToTarget();
+            else isFollowing = false;
         }
         else
         {
-            isFollowing = false;
+            if (currentSqrDistance > stayAwaySqrDistance || !stopWhenReachedTarget) MoveToTarget();
         }
 
         if (isFollowing)
         {
             LookToTarget();
-            RecordTargetPosition();
         }
         else
         {
-            desiredPositions.Clear();
+            if (desiredPositions.Count > bufferSize) desiredPositions.RemoveAt(0);
         }
-
-
+        if (desiredPositions.Count == 0) isFollowing = false;
     }
 
     void RecordTargetPosition()
     {
-        // record target's position ONLY IF target has moved beyond the threshold:
+        // record target's position ONLY IF target has moved beyond its threshold:
         if (desiredPositions.Count == 0) desiredPositions.Add(target.transform.position);
 
         if (desiredPositions.Count > 0 && Vector3.SqrMagnitude(desiredPositions[desiredPositions.Count - 1] - target.transform.position) >= sqrMoveThreshold)
@@ -78,13 +97,17 @@ public class FollowerObject : MonoBehaviour
 
     void LookToTarget()
     {
-        relativePos = target.transform.position - transform.position;
+        if (lookAt == WhatToLook.target || desiredPositions.Count == 0)
+            relativePos = target.transform.position - transform.position;
+        else
+            relativePos = desiredPositions[0] - transform.position;
+
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(relativePos, Vector3.up), turningSpeed * Time.deltaTime);
     }
 
     void MoveToTarget()
     {
-        if (desiredPositions.Count > 0)
+        if (Time.time > startTime && desiredPositions.Count > 0)
         {
             relativePos = desiredPositions[0] - transform.position;
 
