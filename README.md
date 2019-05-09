@@ -14,3 +14,7 @@ represented by the green wired sphere. It also has a "stay away" radius, represe
 There are few parameters, to keep the code simple, but if someone would like something fancier, feel free to ask (PM me).
 
 Cheers!
+
+![Leader params; not in play mode](Screenshot_1.png)
+
+![Follower params; play mode](Screenshot_2.png)
